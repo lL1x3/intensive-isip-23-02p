@@ -2,7 +2,8 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 
-
+total_call = 0
+data_deadline = 0
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Мейн окно
@@ -39,12 +40,18 @@ def second_win():
 
     def get_text():
         name_todo = e1.get()
-        data_deadline = e2.get()
+        global data_deadline
+        data_deadline = int(e2.get())
 
         todo_and_deadline = [name_todo,data_deadline]
         tree.insert("", "end", values=(todo_and_deadline))
 
+        call_for_minus = total_call - data_deadline
+        lcall2.config(text=call_for_minus)
+        lcall1.config(text='Ваши оставшиеся калории на день')
+
     btn1 = Button(second_window,text= 'Добавить',font = 'inter 15 bold', command=get_text,background='#f3ece4').pack(pady = 25)
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Функция для третьего окна
@@ -77,6 +84,7 @@ def third_win():
 
 
     def set_call():
+        global total_call
         weight = int(eweight.get())
         height = int(eheight.get())
         age = int(eage.get())
@@ -128,7 +136,7 @@ def change_theme():
     root.configure(bg=new_bg)
 
 
-change_theme_button = Button(root, text="☀", command=change_theme)
+change_theme_button = Button(root, text="☀", command=change_theme,background='#f3ece4')
 change_theme_button.pack(anchor = SE, expand=1)
 
 #-----------------------------------------------------------------------------------------------------------------------
